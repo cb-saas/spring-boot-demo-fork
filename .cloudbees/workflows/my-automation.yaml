@@ -1,0 +1,15 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: My automation
+on:
+  push:
+    branches:
+      - "**"
+jobs:
+  build:
+    steps:
+      - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
+        name: mvn
+        kind: build
+        shell: bash
+        run: "mvn clean install "
