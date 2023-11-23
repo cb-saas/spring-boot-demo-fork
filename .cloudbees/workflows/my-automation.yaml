@@ -18,3 +18,15 @@ jobs:
         kind: build
         shell: bash
         run: "mvn clean install "
+      - name: Scan with SonarQube bundled action
+        uses: cloudbees-io/sonarqube-bundled-sast-scan-code@v1
+      - name: Set up Docker Hub registry
+        uses: cloudbees-io/configure-oci-credentials@v1
+        with:
+          registry: index.docker.io # or docker.io
+          username: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}
+          password: ${{ secrets.ACATERNBERG_DOCKER_PW }}
+      - name: Push image to registry
+        uses: cloudbees-io/kaniko@v1
+        with:
+          destination: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}/cb-saas-spring-boot:1.0.0
