@@ -20,6 +20,8 @@ jobs:
         run: "mvn clean install "
       - name: Scan with SonarQube bundled action
         uses: cloudbees-io/sonarqube-bundled-sast-scan-code@v1
+        env:
+          SONAR_SCANNER_OPTS: "-Dsonar.java.binaries=target/classes"
       - name: Set up Docker Hub registry
         uses: cloudbees-io/configure-oci-credentials@v1
         with:
