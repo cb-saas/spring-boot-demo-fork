@@ -31,4 +31,4 @@ jobs:
       - name: Push image to registry
         uses: cloudbees-io/kaniko@v1
         with:
-          destination: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}/cb-saas-spring-boot:1.0.4
+          destination: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}/cb-saas-spring-boot:latest
