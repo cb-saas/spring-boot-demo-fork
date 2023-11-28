@@ -32,3 +32,13 @@ jobs:
         uses: cloudbees-io/kaniko@v1
         with:
           destination: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}/cb-saas-spring-boot:latest
+      - name: Package Helm chart
+        uses: cloudbees-io/helm-package@v1
+        with:
+          chart: ./helm
+          destination: ./
+          version: "0.0.1"
+          app-version: "0.0.1"
+          verify: "false"
+          sign: "false"
+          sign-key: "mykeyname"
