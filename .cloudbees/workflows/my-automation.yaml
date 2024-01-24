@@ -44,5 +44,13 @@ jobs:
           sign-key: mykeyname
       - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
         name: hello
-        run: echo hello 
+        run: echo hello
         shell: bash
+  buildparallel:
+    steps:
+      - uses: cloudbees-io/checkout@v1
+        name: clone
+        kind: build
+        with:
+          provider: GitHub
+    needs: build
