@@ -11,35 +11,38 @@ jobs:
       - uses: docker://alpine/git:latest
         run: |
           git config --global --add safe.directory /cloudbees/workspace
-      - name: checkout
-        uses: cloudbees-io/checkout@v1
+      - uses: cloudbees-io/checkout@v1
+        name: checkout
       - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
         name: mvn
         kind: build
         shell: bash
         run: "mvn clean install "
-      - name: Scan with SonarQube bundled action
-        uses: cloudbees-io/sonarqube-bundled-sast-scan-code@v1
+      - uses: cloudbees-io/sonarqube-bundled-sast-scan-code@v1
+        name: Scan with SonarQube bundled action
         env:
           SONAR_SCANNER_OPTS: sonar.java.binaries=target/classes
-      - name: Set up Docker Hub registry
-        uses: cloudbees-io/configure-oci-credentials@v1
+      - uses: cloudbees-io/configure-oci-credentials@v1
+        name: Set up Docker Hub registry
         with:
-          registry: index.docker.io # or docker.io
+          registry: index.docker.io
           username: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}
           password: ${{ secrets.ACATERNBERG_DOCKER_PW }}
-      - name: Push image to registry
-        uses: cloudbees-io/kaniko@v1
+      - uses: cloudbees-io/kaniko@v1
+        name: Push image to registry
         with:
           destination: ${{ vars.ACATERNBERG_DOCKER_USERNAME }}/cb-saas-spring-boot:latest
-      - name: Package Helm chart
-        uses: cloudbees-io/helm-package@v1
+      - uses: cloudbees-io/helm-package@v1
+        name: Package Helm chart
         with:
           chart: ./helm
           destination: ./
-          version: "0.0.1"
-          app-version: "0.0.1"
+          version: 0.0.1
+          app-version: 0.0.1
           verify: "false"
           sign: "false"
-          sign-key: "mykeyname"
-          
+          sign-key: mykeyname
+      - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
+        name: hello
+        run: echo hello 
+        shell: bash
