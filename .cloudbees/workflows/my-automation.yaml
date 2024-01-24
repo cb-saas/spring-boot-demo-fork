@@ -46,11 +46,3 @@ jobs:
         name: hello
         run: echo hello
         shell: bash
-  buildparallel:
-    steps:
-      - uses: cloudbees-io/checkout@v1
-        name: clone
-        kind: build
-        with:
-          provider: GitHub
-    needs: build
