@@ -49,3 +49,11 @@ jobs:
         shell: bash
     outputs:
       version: ${{steps.compute-version.outputs.version}}
+  deploy:
+    steps:
+      - uses: docker://golang:1.20
+        name: getversion
+        run: 'echo "version to deploy: ${{need.build.outputs.version}}'
+        shell: sh
+    needs:
+      - build
