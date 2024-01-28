@@ -21,10 +21,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.ACATERNBERG_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.ACATERNBERG_AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
-          role-to-assume: cloudbees-iam
+          aws-region: us-east-1
+          role-to-assume: infra-admin
           role-external-id: acaternberg
           role-duration-seconds: 1200
-          role-session-name: MySessionName
+          role-session-name: myawssession
       - uses: acaternberg-s3-upload
         name: s3
