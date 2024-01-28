@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: docker://golang:1.20
         name: showversion
-        run: 'echo "version to deploy: ${{needs.build.outputs.version}}'
+        run: 'echo version to deploy: ${{needs.build.outputs.version}}'
         shell: sh
     needs:
       - build
