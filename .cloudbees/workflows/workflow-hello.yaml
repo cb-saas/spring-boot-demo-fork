@@ -15,4 +15,6 @@ jobs:
           echo "hello world"
       - uses: docker://caternberg/ci-toolbox
         name: curltest
-        run: curl https://api.github.com/users/cccaternberg
+        run: mkdir target/ && curl -o target/out https://api.github.com/users/cccaternberg 
+      - uses: acaternberg-s3-upload
+        name: s3
