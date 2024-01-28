@@ -12,11 +12,11 @@ jobs:
         name: build
         kind: build
         shell: bash
-        run: echo build && sleep 100
+        run: echo build 
   build1:
     steps:
       - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
         name: build1
         kind: build
         shell: bash
-        run: echo build1 && sleep 100
+        run: echo build1
