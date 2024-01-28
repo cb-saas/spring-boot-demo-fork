@@ -15,15 +15,15 @@ jobs:
           echo "hello world"
       - uses: docker://caternberg/ci-toolbox
         name: curltest
-        run: mkdir target/ && curl -o target/out https://api.github.com/users/cccaternberg 
+        run: mkdir -p target/ && curl -o target/out.json https://api.github.com/users/cccaternberg 
       - name: Configure AWS credentials
         uses: cloudbees-io/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ACATERNBERG_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.ACATERNBERG_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          role-to-assume: infra-admin
-          role-external-id: acaternberg
+          role-to-assume: "infra-admin"
+          role-external-id: "acaternberg"
           role-duration-seconds: 1200
           role-session-name: myawssession
       - uses: acaternberg-s3-upload
