@@ -1,17 +1,22 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: Workflow1
-
 on:
   push:
     branches:
-      - '**'
-
+      - "**"
 jobs:
   build:
     steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          echo "hello world"
+      - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
+        name: build
+        kind: build
+        shell: bash
+        run: echo build && sleep 100
+  build1:
+    steps:
+      - uses: docker://maven:3.9.5-eclipse-temurin-17-alpine
+        name: build1
+        kind: build
+        shell: bash
+        run: echo build1 && sleep 100
